@@ -1,4 +1,4 @@
-import asteroid from 'asteroid.js'
+import asteroid from './asteroid.js'
 
 const scene = document.querySelector('a-scene')
 
