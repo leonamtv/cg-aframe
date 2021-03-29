@@ -31,6 +31,6 @@ const asteroid = ( y = 1, size = 5, fps = 24) => {
     }, frame_interval)
 
     return element
-}
+};
 
-module.exports = asteroid
+export default asteroid;
