@@ -48,7 +48,7 @@ function createMovimentedSpheres() {
   for (let i = 0; i < 200; i++) {
     const x = Math.random() * 16 - 8;
     const y = Math.random() * 2;
-    const z = -200 + Math.random() * 10d0;
+    const z = -200 + Math.random() * 100;
     createMovimentedSphere({ x, y, z });
   }
 }
