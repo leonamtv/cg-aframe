@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
+  
+
+    <script>
+      document.write(
+        '<script src="http://' + (location.host || 'localhost').split(':')[0] +
+        ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+
+    <script src="./index.js"></script>
+  </head>
+  <body>
+    <a-scene initialize>
+      <a-sky color="#000000"></a-sky>
+      <a-sphere
+        position="0 0.4 -5"
+        radius="1.25"
+        material="
+          color: #b3464c;
+          opacity: 0.95;
+          transparent: true;
+          shader: flat;
+        "
+        
+        animation__pos="
+          property: position;
+          to: 0 0 -5;
+          easing: easeInOutQuad;
+          dir: alternate;
+          dur: 1000;
+          loop: true
+        "
+        animation__color="
+          property: material.color;
+          to: #572326;
+          easing: easeInOutQuad;
+          dir: alternate;
+          dur: 1000;
+          loop: true
+        "
+      ></a-sphere>
+
+
+
+    </a-scene>
+  </body>
+</html>
