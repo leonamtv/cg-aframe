@@ -1,5 +1,5 @@
 registerInitializeComponent();
-
+registerCustomCameraComponent();
 registerRandomMoveComponent();
 
 function registerInitializeComponent() {
@@ -50,8 +50,6 @@ function createMovimentedSphere(
   { x, y, z },
   { velocityX, velocityY, velocityZ }
 ) {
-  console.log({ x, y, z });
-
   const sphereEl = document.createElement("a-sphere");
   sphereEl.setAttribute("position", { x, y, z });
   sphereEl.setAttribute("radius", Math.random() * 2 + 2);
