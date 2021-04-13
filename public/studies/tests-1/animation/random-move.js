@@ -1,9 +1,10 @@
-function registerRandomMoveComponent() {
+function registerRandomMoveComponent( ) {
   AFRAME.registerComponent("random-move", {
     schema: {
       velocityX: { type: "number", default: 10 },
       velocityY: { type: "number", default: 0 },
       velocityZ: { type: "number", default: 10 },
+      limit : { type: "number", default: 300 }
     },
 
     init: function () {
@@ -22,8 +23,6 @@ function registerRandomMoveComponent() {
     tick: function (time) {
       const componentTime = time - this.initialTime;
 
-      const currentPosition = this.el.getAttribute("position");
-
       const x = this.initialX + (componentTime * this.data.velocityX) / 1000;
       const y = this.initialY + (componentTime * this.data.velocityY) / 1000;
       const z = this.initialZ + (componentTime * this.data.velocityZ) / 1000;
@@ -34,9 +33,9 @@ function registerRandomMoveComponent() {
         z,
       });
 
-      // if (z > 10) {
-      //   this.el.parentNode.removeChild(this.el);
-      // }
+      if (x > this.data.limit || x < ( -this.data.limit ) || z > this.data.limit || z < ( -this.data.limit )) {
+        this.el.parentNode.removeChild(this.el);
+      }
     },
   });
 }
