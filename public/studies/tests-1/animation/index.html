@@ -12,6 +12,7 @@
 
     <script src="./custom-camera.js"></script>
     <script src="./random-move.js"></script>
+    <script src="./bullet.js"></script>
     <script src="./index.js"></script>
   </head>
   <body>
@@ -22,8 +23,12 @@
         position="0 1.6 5"
       ></a-camera>
 
+      <a-assets>
+        <img id="sky" src="../../../assets/sky.jpg">
+      </a-assets>
+      <a-sky src="#sky"></a-sky>
+      <!-- <a-sky color="#000000"></a-sky> -->
 
-      <a-sky color="#000000"></a-sky>
       <a-cylinder
         id="aircraft"
         radius="1.25"

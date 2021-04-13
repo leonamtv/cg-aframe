@@ -2,6 +2,8 @@
   registerInitializeComponent();
   registerCustomCameraComponent();
   registerRandomMoveComponent();
+  registerBulletMoveComponent();
+  registerBulletEvent();
 
   let cameraEl;
   let aircraftEl;
@@ -16,8 +18,33 @@
     });
   }
 
+  function registerBulletEvent() {
+    this.onkeyup = function(e){
+      if(e.keyCode == 32){
+        createBullet()
+      }
+    }
+  }
+   
+
   function createMovimentedSpheres() {
     setInterval(() => createSphere(), 500);
+  }
+
+  function createBullet () {
+    const bulletRadius = 1.4;
+    const xVelocityRange = 20;
+    const zVelocityRange = 20;
+
+    const velocityX = Math.random() * 2 * xVelocityRange - xVelocityRange;
+    const velocityY = 0;
+    const velocityZ = Math.random() * 2 * zVelocityRange - zVelocityRange;
+
+    createMovimentedBullet(
+      { x : 0, y : 0, z : 0 },
+      { velocityX, velocityY, velocityZ },
+      bulletRadius
+    )
   }
 
   function createSphere() {
@@ -26,6 +53,7 @@
     const camZ = camPosition.z;
 
     const sphereRadius = Math.random() * 2 + 2;
+    const bulletRadius = 1.4;
     const aircraftRadius = aircraftEl.getAttribute("radius");
 
     const xRange = 30;
@@ -52,6 +80,7 @@
       { velocityX, velocityY, velocityZ },
       sphereRadius
     );
+    
   }
 
   /// 0: center of creation. Replace by aircraft position
@@ -81,5 +110,28 @@
 
     const sceneEl = document.querySelector("a-scene");
     sceneEl.appendChild(sphereEl);
+  }
+ 
+  function createMovimentedBullet(
+    { x, y, z },
+    { velocityX, velocityY, velocityZ },
+    radius
+  ) {
+    const bulletEl = document.createElement("a-sphere");
+    const aircraftPosition = aircraftEl.getAttribute("position");
+
+    bulletEl.setAttribute("position", { x, y, z });
+    bulletEl.setAttribute("radius", radius);
+    bulletEl.setAttribute("material", { color: "blue", shader: "flat" });
+    bulletEl.setAttribute("bullet", {
+      velocityX,
+      velocityY,
+      velocityZ,
+      directionX : aircraftPosition.x,
+      directionZ : aircraftPosition.z,
+    });
+
+    const sceneEl = document.querySelector("a-scene");
+    sceneEl.appendChild(bulletEl);
   }
 })();
