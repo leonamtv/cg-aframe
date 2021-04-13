@@ -1,8 +1,3 @@
-const maxRotationRangeX = 360;
-const maxRotationRangeY = 360;
-
-const velocityFactor = 0.1;
-
 const keyActions = {
   // page up
   33: () => (camY -= velocityFactor),
@@ -25,22 +20,28 @@ const keyActions = {
   // w
   87: () => {
     camX += velocityFactor * sinRotationX;
-    camZ -= velocityFactor * cosRotationX * cosRotationY;
+    camZ -= velocityFactor * cosRotationX;
   },
 
   // s
   83: () => {
     camX -= velocityFactor * sinRotationX;
-    camZ += velocityFactor * cosRotationX * cosRotationY;
+    camZ += velocityFactor * cosRotationX;
   },
 };
+
+const maxRotationRangeX = 360;
+const maxRotationRangeY = 360;
+
+const velocityFactor = 1;
+
+let cameraEl;
+let aircraftEl;
 
 let teclasPressionadas = {};
 
 let sinRotationX = 0;
-let sinRotationY = 0;
 let cosRotationX = 1;
-let cosRotationY = 1;
 
 let camX = 0;
 let camY = 0;
@@ -50,10 +51,14 @@ let camRotationX = 0;
 let camRotationY = 0;
 let camRotationZ = 0;
 
+let enableMouseCameraControl = true;
+
 function registerCustomCameraComponent() {
   AFRAME.registerComponent("custom-camera", {
     init: function () {
       registerEvents();
+      cameraEl = document.querySelector("a-camera");
+      aircraftEl = document.querySelector("#aircraft");
     },
 
     tick: tickKeyboardMovement,
@@ -61,6 +66,7 @@ function registerCustomCameraComponent() {
 }
 
 function registerEvents() {
+  document.ontouchstart = handleTouchStart;
   document.onmousemove = handleMouseMove;
   document.onkeydown = handleKeyDown;
   document.onkeyup = handleKeyUp;
@@ -75,51 +81,35 @@ function tickKeyboardMovement() {
     }
   });
 
-  this.el.setAttribute("position", { x: camX, y: camY, z: camZ });
-  this.el.setAttribute("rotation", {
-    x: 0,
-    y: camRotationY,
-    z: 0,
-  });
+  if (enableMouseCameraControl) {
+    moveCamera();
+  }
+
+  moveAircraft();
 }
 
 function getCamControlValues() {
   return { camX, camY, camZ, camRotationX, camRotationY, camRotationZ };
 }
 
-function handleMouseMove(event) {
-  const { innerWidth, innerHeight } = window;
-
-  defineCamRotation(
-    Math.min(event.clientX, innerWidth),
-    Math.min(event.clientY, innerHeight),
-    innerWidth,
-    innerHeight
-  );
+function handleTouchStart() {
+  enableMouseCameraControl = false;
 }
 
-function defineCamRotation(
-  mousePositionX,
-  mousePositionY,
-  objectWidth,
-  objectHeight
-) {
+function handleMouseMove(event) {
+  const { innerWidth } = window;
+  defineCamRotation(Math.min(event.clientX, innerWidth), innerWidth);
+}
+
+function defineCamRotation(mousePositionX, objectWidth) {
   const mouseRotationX =
     (mousePositionX / objectWidth) * maxRotationRangeX - maxRotationRangeX / 2;
-
-  const mouseRotationY =
-    (mousePositionY / objectHeight) * maxRotationRangeY - maxRotationRangeY / 2;
-
   camRotationY = -mouseRotationX;
 
   const mouseRotationXRad = degToRad(mouseRotationX);
-  const mouseRotationYRad = degToRad(mouseRotationY);
 
   sinRotationX = Math.sin(mouseRotationXRad);
-  sinRotationY = Math.sin(mouseRotationYRad);
-
   cosRotationX = Math.cos(mouseRotationXRad);
-  cosRotationY = Math.cos(mouseRotationYRad);
 }
 
 function handleKeyDown(evento) {
@@ -138,4 +128,37 @@ function handleKeyUp(evento) {
 
 function degToRad(graus) {
   return (graus * Math.PI) / 180;
+}
+
+function moveCamera() {
+  cameraEl.setAttribute("position", { x: camX, y: camY + 2, z: camZ });
+  cameraEl.setAttribute("rotation", {
+    x: 0,
+    y: camRotationY,
+    z: 0,
+  });
+}
+
+function moveAircraft() {
+  const { x, y, z } = cameraEl.getAttribute("position");
+
+  const camRotationY = cameraEl.getAttribute("rotation").y;
+  const camRotationYRad = degToRad(camRotationY);
+
+  const aircraftRadius = 8;
+
+  const aircraftX = x + aircraftRadius * Math.sin(-camRotationYRad);
+  const aircraftY = y;
+  const aircraftZ = z - aircraftRadius * Math.cos(-camRotationYRad);
+
+  aircraftEl.setAttribute("position", {
+    x: aircraftX,
+    y: aircraftY,
+    z: aircraftZ,
+  });
+
+  const animation_pos = aircraftEl.getAttribute("animation__pos");
+  animation_pos.to = `${aircraftX} ${aircraftY + 0.5} ${aircraftZ}`;
+
+  aircraftEl.setAttribute("animation__pos", animation_pos);
 }

@@ -6,7 +6,7 @@ function registerRandomMoveComponent() {
       velocityZ: { type: "number", default: 10 },
     },
 
-    init: function (a) {
+    init: function () {
       const scene = document.querySelector("a-scene");
       this.initialTime = scene.time;
 

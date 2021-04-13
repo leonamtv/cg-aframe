@@ -15,19 +15,17 @@
     <script src="./index.js"></script>
   </head>
   <body>
-    <a-scene initialize>
+    <a-scene initialize custom-camera>
 
       <a-camera
-        look-controls-enabled="false"
-        wasd-controls-enabled="false"
+        look-controls
         position="0 1.6 5"
-        custom-camera
       ></a-camera>
 
 
       <a-sky color="#000000"></a-sky>
-      <a-sphere
-        position="0 0.4 -5"
+      <a-cylinder
+        id="aircraft"
         radius="1.25"
         material="
           color: #b3464c;
@@ -38,7 +36,7 @@
         
         animation__pos="
           property: position;
-          to: 0 0 -5;
+          to: 0 0 0;
           easing: easeInOutQuad;
           dir: alternate;
           dur: 1000;
