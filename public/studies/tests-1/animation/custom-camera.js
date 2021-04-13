@@ -1,10 +1,4 @@
 const keyActions = {
-  // page up
-  33: () => (camY -= velocityFactor),
-
-  // page down
-  34: () => (camY += velocityFactor),
-
   // a
   65: () => {
     camX -= velocityFactor * cosRotationX;
@@ -131,7 +125,7 @@ function degToRad(graus) {
 }
 
 function moveCamera() {
-  cameraEl.setAttribute("position", { x: camX, y: camY + 2, z: camZ });
+  cameraEl.setAttribute("position", { x: camX, y: camY + 10, z: camZ });
   cameraEl.setAttribute("rotation", {
     x: 0,
     y: camRotationY,
@@ -145,10 +139,10 @@ function moveAircraft() {
   const camRotationY = cameraEl.getAttribute("rotation").y;
   const camRotationYRad = degToRad(camRotationY);
 
-  const aircraftRadius = 8;
+  const aircraftRadius = 20;
 
   const aircraftX = x + aircraftRadius * Math.sin(-camRotationYRad);
-  const aircraftY = y;
+  const aircraftY = y - 8;
   const aircraftZ = z - aircraftRadius * Math.cos(-camRotationYRad);
 
   aircraftEl.setAttribute("position", {
