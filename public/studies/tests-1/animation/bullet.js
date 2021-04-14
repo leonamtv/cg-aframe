@@ -25,11 +25,7 @@ function registerBulletMoveComponent() {
             const y = this.initialY + (componentTime * this.data.velocityY) / 10;
             const z = this.initialZ + (componentTime * this.data.velocityZ) / 10;
         
-            this.el.setAttribute("position", {
-                x,
-                y,
-                z,
-            });
+            this.el.setAttribute("position", { x, y, z });
         
             if (x > this.data.limit || z > this.data.limit || x < ( -this.data.limit ) || z < ( -this.data.limit )) {
               this.el.parentNode.removeChild(this.el);

@@ -4,7 +4,8 @@ function registerRandomMoveComponent( ) {
       velocityX: { type: "number", default: 10 },
       velocityY: { type: "number", default: 0 },
       velocityZ: { type: "number", default: 10 },
-      limit : { type: "number", default: 300 }
+      limit : { type: "number", default: 300 },
+      level : { type: "number", default: 1 }
     },
 
     init: function () {

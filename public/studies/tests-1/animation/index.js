@@ -32,7 +32,7 @@
   }
 
   function createBullet () {
-    const bulletRadius = 1.4;
+    const bulletRadius = 1.2;
     const xVelocityRange = 20;
     const zVelocityRange = 20;
 
