@@ -32,7 +32,10 @@ function registerBulletMoveComponent() {
                 const pos = e.getAttribute('position')
                 const rad = getElementRadius(e);
                 if ( testCirclesColision ( pos.x, pos.z, rad, x, z, this.data.radius) ) {
-                    console.log('colisão')
+                    let pontos = document.getElementById('pontos')
+                    let pts = parseInt(pontos.innerText)
+                    pts ++;
+                    pontos.innerText = pts.toString();
                     e.setAttribute("level", 2)
                     this.el.parentNode.removeChild(this.el);
                     let audio = new Audio('../../../assets/explosion.mp3');
