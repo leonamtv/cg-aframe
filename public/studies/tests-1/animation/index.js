@@ -36,15 +36,20 @@
     const xVelocityRange = 20;
     const zVelocityRange = 20;
 
-    const velocityX = Math.random() * 2 * xVelocityRange - xVelocityRange;
+    const camRotationY = cameraEl.getAttribute("rotation").y;
+    const camRotationYRad = degToRad(camRotationY);
+
+    const velocityX = -Math.sin(camRotationYRad);
     const velocityY = 0;
-    const velocityZ = Math.random() * 2 * zVelocityRange - zVelocityRange;
+    const velocityZ = -Math.cos(-camRotationYRad);
+
+    const {x, z} = cameraEl.getAttribute('position');
 
     createMovimentedBullet(
-      { x : 0, y : 0, z : 0 },
+      { x, y: 0, z },
       { velocityX, velocityY, velocityZ },
       bulletRadius
-    )
+    );
   }
 
   function createSphere() {
@@ -118,7 +123,6 @@
     radius
   ) {
     const bulletEl = document.createElement("a-sphere");
-    const aircraftPosition = aircraftEl.getAttribute("position");
 
     bulletEl.setAttribute("position", { x, y, z });
     bulletEl.setAttribute("radius", radius);
@@ -126,9 +130,7 @@
     bulletEl.setAttribute("bullet", {
       velocityX,
       velocityY,
-      velocityZ,
-      directionX : aircraftPosition.x,
-      directionZ : aircraftPosition.z,
+      velocityZ
     });
 
     const sceneEl = document.querySelector("a-scene");
