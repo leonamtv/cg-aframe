@@ -9,12 +9,24 @@
 
       .logo-wrapper {
         width: 100%;
+        display: grid;
+        grid-template-rows: auto 90%;
+      }
+
+      .logo-wrapper p {
+        color: rgb(255, 255, 133);
+        font-style: italic;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
       }
 
       .logo {
         display: block;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 0;
         width: 400px;
       }
 
@@ -39,12 +51,13 @@
       }
 
       .scene {
-        height:70%;
+        height:62%;
+        border: 3px solid rgb(255, 255, 133);
       }
 
       .tirinha h2, h4 {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        color: white;
+        color: rgb(255, 255, 133);
         font-style: italic;
       }
 
@@ -65,6 +78,7 @@
   <body>
     <div class='logo-wrapper'>
       <img class='logo' src='../../../assets/logo.png'>
+      <p>com bolinhas</p>
     </div>
     <a-scene initialize custom-camera embedded class='scene'>
 
