@@ -120,10 +120,6 @@ function handleKeyUp(evento) {
   teclasPressionadas[evento.keyCode] = false;
 }
 
-function degToRad(graus) {
-  return (graus * Math.PI) / 180;
-}
-
 function moveCamera() {
   cameraEl.setAttribute("position", { x: camX, y: camY + 10, z: camZ });
   cameraEl.setAttribute("rotation", {

@@ -28,7 +28,7 @@
    
 
   function createMovimentedSpheres() {
-    setInterval(() => createSphere(), 500);
+    setInterval(() => createSphere(), 2000);
   }
 
   function createBullet () {

@@ -14,6 +14,8 @@ function registerRandomMoveComponent( ) {
       this.initialX = this.el.getAttribute("position").x;
       this.initialY = this.el.getAttribute("position").y;
       this.initialZ = this.el.getAttribute("position").z;
+
+      this.aircraftEl = document.querySelector("#aircraft");
     },
 
     update: function () {},
@@ -36,6 +38,33 @@ function registerRandomMoveComponent( ) {
       if (x > this.data.limit || x < ( -this.data.limit ) || z > this.data.limit || z < ( -this.data.limit )) {
         this.el.parentNode.removeChild(this.el);
       }
+
+      testColisionWithAircraft(this.el, this.aircraftEl);
     },
   });
+}
+
+let gameOver = false;
+
+function testColisionWithAircraft(asteroidEl, aircraftEl) {
+  const asteroidPos = asteroidEl.getAttribute("position");
+  const asteroidRadius = getElementRadius(asteroidEl);
+
+  const aircraftPos = aircraftEl.getAttribute("position");
+  const aircraftRadius = getElementRadius(aircraftEl);
+
+  const haveColision = testCirclesColision(
+    asteroidPos.x,
+    asteroidPos.z,
+    asteroidRadius,
+    aircraftPos.x,
+    aircraftPos.z,
+    aircraftRadius
+  );
+
+  if (haveColision === true && gameOver === false) {
+    alert("colision. Game over!");
+    gameOver = true;
+    location.reload();
+  }
 }
