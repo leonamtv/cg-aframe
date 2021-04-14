@@ -24,7 +24,7 @@ const keyActions = {
   },
 };
 
-const maxRotationRangeX = 360;
+const maxRotationRangeX = 360 * 2;
 const maxRotationRangeY = 360;
 
 const velocityFactor = 1;
