@@ -35,7 +35,7 @@ function registerBulletMoveComponent() {
                     let pontos = document.getElementById('pontos')
                     let pts = parseInt(pontos.innerText)
                     pts ++;
-                    pontos.innerText = pts.toString();
+                    pontos.innerText = pts.toString(); 
                     e.setAttribute("level", 2)
                     this.el.parentNode.removeChild(this.el);
                     let audio = new Audio('../../../assets/explosion.mp3');

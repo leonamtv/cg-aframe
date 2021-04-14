@@ -64,8 +64,14 @@ function testColisionWithAircraft(asteroidEl, aircraftEl) {
   );
 
   if (haveColision === true && gameOver === false) {
-    alert("colision. Game over!");
-    gameOver = true;
-    location.reload();
+    // let vida = document.getElementById('vida')
+    // let vid = parseInt(vida.innerText)
+    // vid--
+    // vida.innerText = vid.toString(); 
+    // if ( vid == 0 ) {
+      alert("colision. Game over!");
+      gameOver = true;
+      location.reload();
+    // }   
   }
 }
