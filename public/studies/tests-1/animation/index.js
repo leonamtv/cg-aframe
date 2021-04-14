@@ -50,7 +50,7 @@
     const velocityY = 0;
     const velocityZ = -Math.cos(-camRotationYRad);
 
-    const {x, z} = cameraEl.getAttribute('position');
+    const {x, z} = aircraftEl.getAttribute("position");
 
     createMovimentedBullet(
       { x, y: 0, z },

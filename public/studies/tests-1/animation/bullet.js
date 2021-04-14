@@ -13,8 +13,7 @@ function registerBulletMoveComponent() {
           this.initialX = this.el.getAttribute("position").x;
           this.initialY = this.el.getAttribute("position").y;
           this.initialZ = this.el.getAttribute("position").z;
-          this.spheres = document.querySelectorAll(".asteroid")
-          
+          this.spheres = document.querySelectorAll(".asteroid");
         },
     
         update: function () {},
@@ -31,8 +30,8 @@ function registerBulletMoveComponent() {
 
             this.spheres.forEach(e => {
                 const pos = e.getAttribute('position')
-                const rad = e.getAttribute('radius')
-                if ( testCirclesColision ( pos.x, pos.z, rad, x, z, 0 ) ) {
+                const rad = getElementRadius(e);
+                if ( testCirclesColision ( pos.x, pos.z, rad, x, z, this.data.radius) ) {
                     console.log('colisão')
                     e.setAttribute("level", 2)
                     this.el.parentNode.removeChild(this.el);
