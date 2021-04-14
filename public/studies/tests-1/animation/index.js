@@ -112,7 +112,7 @@
     const sphereEl = document.createElement("a-sphere");
     sphereEl.setAttribute("position", { x, y, z });
     sphereEl.setAttribute("radius", radius);
-
+    sphereEl.setAttribute("class", 'asteroid');
     sphereEl.setAttribute("material", { color: "#b1caf2", shader: "flat" });
     sphereEl.setAttribute("random-move", {
       velocityX,
