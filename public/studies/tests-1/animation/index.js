@@ -11,6 +11,10 @@
   function registerInitializeComponent() {
     AFRAME.registerComponent("initialize", {
       init: function () {
+        let audio = new Audio('../../../assets/trilha.m4a');
+        audio.loop = true
+        audio.volume = 0.3
+        audio.play( )
         cameraEl = document.querySelector("a-camera");
         aircraftEl = document.querySelector("#aircraft");
         createMovimentedSpheres();
@@ -23,6 +27,7 @@
       if(e.keyCode == 32){
         createBullet()
         let audio = new Audio('../../../assets/gun.mp3');
+        audio.volume = 0.3
         audio.play( )
       }
     }
