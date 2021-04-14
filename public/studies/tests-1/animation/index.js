@@ -22,6 +22,8 @@
     this.onkeyup = function(e){
       if(e.keyCode == 32){
         createBullet()
+        let audio = new Audio('../../../assets/gun.mp3');
+        audio.play( )
       }
     }
   }
