@@ -1,8 +1,54 @@
-<html>
+  <html>
   <head>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
-  
+    <style>
+      * {
+        background-color: black   ;
+      }
+
+      .logo-wrapper {
+        width: 100%;
+      }
+
+      .logo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+      }
+
+      h1 {
+        color: yellow;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      .tirinha {
+        margin-top: 1%;
+        display: grid;
+        grid-template-columns: 8% auto auto;
+      }
+
+      .tirinha div {
+        display: grid;
+        grid-template-rows: 20% auto;
+      }
+
+      .tirinha img {
+        width : 100px;
+      }
+
+      .scene {
+        height:70%;
+      }
+
+      .tirinha h2, h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: white;
+        font-style: italic;
+      }
+
+    </style>
 
     <script>
       document.write(
@@ -17,7 +63,10 @@
     <script src="./index.js"></script>
   </head>
   <body>
-    <a-scene initialize custom-camera>
+    <div class='logo-wrapper'>
+      <img class='logo' src='../../../assets/logo.png'>
+    </div>
+    <a-scene initialize custom-camera embedded class='scene'>
 
       <a-camera
         look-controls
@@ -29,8 +78,6 @@
         <img id="sky" src="../../../assets/sky.jpg">
       </a-assets>
       <a-sky src="#sky"></a-sky>
-      <!-- <a-sky color="#000000"></a-sky> -->
-
       <a-cylinder
         id="aircraft"
         radius="1.25"
@@ -59,8 +106,13 @@
         "
       ></a-sphere>
 
-
-
     </a-scene>
+    <div class='tirinha'>
+      <img src="../../../assets/nerd.png">
+      <div>
+        <h2>"Mano, não tem som no vácuo"</h2>
+        <h4>Nerdão, 2021 </h4>
+      </div>
+    </div>
   </body>
 </html>
