@@ -31,6 +31,12 @@
         <img id="sky" src="../../../assets/sky.jpg">
       </a-assets>
       <a-sky src="#sky"></a-sky>
+
+      <a-assets>
+        <a-asset-item id="#spaceship" src="../../../assets/xwing.gltf"></a-asset-item>
+      </a-assets>
+      <a-entity gltf-model="#spaceship" scale="0.005 0.005 0.005" modify-materials></a-entity>
+
       <a-cylinder
         id="aircraft"
         radius="1.25"
