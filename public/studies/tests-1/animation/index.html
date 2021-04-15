@@ -8,11 +8,28 @@
         '<script src="http://' + (location.host || 'localhost').split(':')[0] +
         ':35729/livereload.js?snipver=1"></' + 'script>')
     </script>
-  <script src="./utils.js"></script>
-  <script src="./custom-camera.js"></script>
+    <script src="./utils.js"></script>
+    <script src="./custom-camera.js"></script>
     <script src="./random-move.js"></script>
     <script src="./bullet.js"></script>
     <script src="./index.js"></script>
+    <script>
+      AFRAME.registerComponent('modify-materials', {
+        init: function () {
+          // Wait for model to load.
+          this.el.addEventListener('model-loaded', () => {
+            // Grab the mesh / scene.
+            const obj = this.el.getObject3D('mesh');
+            // Go over the submeshes and modify materials we want.
+            obj.traverse(node => {
+              if (node.name.indexOf('ship') !== -1) {
+                node.material.color.set('red');
+              }
+            });
+          });
+        }
+      });
+    </script>
   </head>
   <body>
     <div class='logo-wrapper'>
@@ -33,9 +50,9 @@
       <a-sky src="#sky"></a-sky>
 
       <a-assets>
-        <a-asset-item id="#spaceship" src="../../../assets/xwing.gltf"></a-asset-item>
+        <a-asset-item id="spaceship" src="../../../assets/xwing.gltf"></a-asset-item>
       </a-assets>
-      <a-entity gltf-model="#spaceship" scale="0.005 0.005 0.005" modify-materials></a-entity>
+      <a-entity gltf-model="#spaceship" scale="0.1 0.1 0.1" modify-materials></a-entity>
 
       <a-cylinder
         id="aircraft"
