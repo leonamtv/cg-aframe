@@ -4,8 +4,8 @@
 
 .logo-wrapper {
   width: 100%;
-  display: grid;
-  grid-template-rows: auto 90%;
+  display: flex;
+  flex-direction: column;
 }
 
 .logo-wrapper p {
@@ -23,7 +23,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
-  width: 400px;
+  width: 350px;
 }
 
 h1 {
@@ -32,11 +32,17 @@ h1 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+}
+
 .tirinha {
   background: none;
   margin-top: 1%;
-  display: grid;
-  grid-template-columns: 8% auto auto;
+  display: flex;
+  flex-direction: row;
 }
 
 .tirinha div {
@@ -63,13 +69,13 @@ h1 {
 }
 
 .pontos {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translateX(-50%);
   color: rgb(255, 255, 133);
-  font-size: 40;
+  font-size: 30;
   font-family: 'Courier New', Courier, monospace;
   animation: glow_a 1s ease-in-out infinite alternate;
 }
@@ -93,12 +99,13 @@ h1 {
 }
 
 .vida {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
   background: none;
-  position: absolute;
-  bottom: 4%;
-  left: 70%;
   color: white;
-  font-size: 40;
+  font-size: 25;
   font-weight: 500;
   font-family: 'Courier New', Courier, monospace;
   animation: glow 1s ease-in-out infinite alternate;
