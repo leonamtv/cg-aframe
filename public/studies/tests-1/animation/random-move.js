@@ -65,19 +65,29 @@ function testColisionWithAircraft(asteroidEl, aircraftEl) {
 
   if (!lastAsteroid )
     lastAsteroid = asteroidEl
-
-  if (haveColision === true && gameOver === false) {
-    if ( lastAsteroid ) {
-      if ( lastAsteroid != asteroidEl ) {
-        let vida = document.getElementById('vida')
-        let vid = parseInt(vida.innerText)
-        vid--
-        vida.innerHTML= vid.toString() + ' <p> de vida</p>'; 
-        if ( vid == 0 ) {
-          alert("colision. Game over!");
-          gameOver = true;
-          location.reload();
-        }   
+    
+    if (haveColision === true && gameOver === false) {
+      if ( lastAsteroid ) {
+        if ( lastAsteroid != asteroidEl ) {
+          let vida = document.getElementById('vida')
+          let vid = parseInt(vida.innerText)
+          vid--
+          vida.innerHTML= vid.toString() + ' <p> de vida</p>'; 
+          if ( vid == 0 ) {
+            // alert("colision. Game over!");
+            const textEl = document.createElement("a-text");
+            textEl.setAttribute('value', 'GAME OVER!!')
+            textEl.setAttribute('color', 'white')
+            textEl.setAttribute('width', '80')
+            aircraftEl = document.querySelector("#aircraft");
+            textEl.setAttribute('position', {  x : aircraftEl.getAttribute('position').x, y : aircraftEl.getAttribute('position').y , z : aircraftEl.getAttribute('position').z })
+            const sceneEl = document.querySelector("a-scene");
+            sceneEl.appendChild(textEl);
+            gameOver = true;
+            setTimeout(() => {
+              location.reload();
+            }, 200)
+          }   
         lastAsteroid = asteroidEl
       }
     }
