@@ -45,6 +45,7 @@ function registerRandomMoveComponent( ) {
 }
 
 let gameOver = false;
+let lastAsteroid = null
 
 function testColisionWithAircraft(asteroidEl, aircraftEl) {
   const asteroidPos = asteroidEl.getAttribute("position");
@@ -62,15 +63,23 @@ function testColisionWithAircraft(asteroidEl, aircraftEl) {
     aircraftRadius
   );
 
+  if (!lastAsteroid )
+    lastAsteroid = asteroidEl
+
   if (haveColision === true && gameOver === false) {
-    // let vida = document.getElementById('vida')
-    // let vid = parseInt(vida.innerText)
-    // vid--
-    // vida.innerText = vid.toString(); 
-    // if ( vid == 0 ) {
-      alert("colision. Game over!");
-      gameOver = true;
-      location.reload();
-    // }   
+    if ( lastAsteroid ) {
+      if ( lastAsteroid != asteroidEl ) {
+        let vida = document.getElementById('vida')
+        let vid = parseInt(vida.innerText)
+        vid--
+        vida.innerHTML= vid.toString() + ' <p> de vida</p>'; 
+        if ( vid == 0 ) {
+          alert("colision. Game over!");
+          gameOver = true;
+          location.reload();
+        }   
+        lastAsteroid = asteroidEl
+      }
+    }
   }
 }
