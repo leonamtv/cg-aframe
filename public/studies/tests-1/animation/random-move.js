@@ -15,7 +15,6 @@ function registerRandomMoveComponent( ) {
       this.initialX = this.el.getAttribute("position").x;
       this.initialY = this.el.getAttribute("position").y;
       this.initialZ = this.el.getAttribute("position").z;
-
       this.aircraftEl = document.querySelector("#aircraft");
     },
 
