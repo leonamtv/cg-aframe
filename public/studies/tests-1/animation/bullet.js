@@ -38,7 +38,8 @@ function registerBulletMoveComponent() {
                   pts += ( level * 2 );
 
                   pontos.innerText = pts.toString(); 
-                  this.el.parentNode.removeChild(this.el);
+                  if ( this.el.parentNode )
+                    this.el.parentNode.removeChild(this.el);
                   let audio = new Audio('../../../assets/explosion.mp3');
                   audio.volume = 1
                   audio.play( )      
