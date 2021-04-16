@@ -113,6 +113,7 @@
     sphereEl.setAttribute("position", { x, y, z });
     sphereEl.setAttribute("radius", radius);
     sphereEl.setAttribute("class", 'asteroid');
+    sphereEl.setAttribute("level", 1);
     sphereEl.setAttribute("material", { color: "#b1caf2", shader: "flat" });
     sphereEl.setAttribute("random-move", {
       velocityX,
