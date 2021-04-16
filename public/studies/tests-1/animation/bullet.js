@@ -33,51 +33,51 @@ function registerBulletMoveComponent() {
                 const rad = getElementRadius(e);
                 if ( testCirclesColision ( pos.x, pos.z, rad, x, z, this.data.radius) ) {
                   let level = e.getAttribute('level')
-                    let pontos = document.getElementById('pontos')
-                    let pts = parseInt(pontos.innerText)
-                    if ( level == 1 )
-                      pts ++;
-                    else  
-                      pts += 3
-                    pontos.innerText = pts.toString(); 
-                    this.el.parentNode.removeChild(this.el);
-                    let audio = new Audio('../../../assets/explosion.mp3');
-                    audio.volume = 1
-                    audio.play( )      
+                  let pontos = document.getElementById('pontos')
+                  let pts = parseInt(pontos.innerText)
+                  pts += ( level * 2 );
+
+                  pontos.innerText = pts.toString(); 
+                  this.el.parentNode.removeChild(this.el);
+                  let audio = new Audio('../../../assets/explosion.mp3');
+                  audio.volume = 1
+                  audio.play( )      
+                  
+                  if ( level <= 2 ) {
+                    const position_e = e.getAttribute('position')
+                    const radius_e = e.getAttribute('radius')
+                    const random_move_e = e.getAttribute("random-move")
                     
-                    if ( level == 1 ) {
-                      const position_e = e.getAttribute('position')
-                      const radius_e = e.getAttribute('radius')
-                      const random_move_e = e.getAttribute("random-move")
-                      
-                      const asteroid_a = document.createElement("a-sphere");
-                      asteroid_a.setAttribute('position', position_e)
-                      asteroid_a.setAttribute('radius', radius_e / 2)
-                      asteroid_a.setAttribute('class', 'asteroid')
-                      asteroid_a.setAttribute("material", { color: "#11caf2", shader: "flat" });
-                      asteroid_a.setAttribute("random-move", {
-                        velocityX : 1.2 * random_move_e.velocityX,
-                        velocityY : 1.2 * random_move_e.velocityY,
-                        velocityZ : 2.4 * random_move_e.velocityZ,
-                      });
+                    const asteroid_a = document.createElement("a-sphere");
+                    asteroid_a.setAttribute('position', position_e)
+                    asteroid_a.setAttribute('radius', radius_e / 2)
+                    asteroid_a.setAttribute('class', 'asteroid')
+                    asteroid_a.setAttribute("material", { color: "#b1caf2", shader: "flat" });
+                    asteroid_a.setAttribute('level', parseInt(level) + 1)
+                    asteroid_a.setAttribute("random-move", {
+                      velocityX : 1.2 * random_move_e.velocityX,
+                      velocityY : 1.2 * random_move_e.velocityY,
+                      velocityZ : 2.4 * random_move_e.velocityZ,
+                    });
 
-                      const asteroid_b = document.createElement("a-sphere");
-                      asteroid_b.setAttribute('position', position_e)
-                      asteroid_b.setAttribute('radius', radius_e / 2)
-                      asteroid_b.setAttribute('class', 'asteroid')
-                      asteroid_b.setAttribute("material", { color: "#11caf2", shader: "flat" });
-                      asteroid_b.setAttribute("random-move", {
-                        velocityX : 1.2 * random_move_e.velocityX,
-                        velocityY : 1.2 * random_move_e.velocityY,
-                        velocityZ : -2.4 * random_move_e.velocityZ,
-                      });
+                    const asteroid_b = document.createElement("a-sphere");
+                    asteroid_b.setAttribute('position', position_e)
+                    asteroid_b.setAttribute('radius', radius_e / 2)
+                    asteroid_b.setAttribute('class', 'asteroid')
+                    asteroid_b.setAttribute("material", { color: "#b1caf2", shader: "flat" });
+                    asteroid_b.setAttribute('level', parseInt(level) + 1)
+                    asteroid_b.setAttribute("random-move", {
+                      velocityX : 1.2 * random_move_e.velocityX,
+                      velocityY : 1.2 * random_move_e.velocityY,
+                      velocityZ : -2.4 * random_move_e.velocityZ,
+                    });
 
-                      const sceneEl = document.querySelector("a-scene");
-                      sceneEl.appendChild(asteroid_a );
-                      sceneEl.appendChild(asteroid_b);
-                      
-                      e.setAttribute('level', 2)
-                    } 
+                    const sceneEl = document.querySelector("a-scene");
+                    sceneEl.appendChild(asteroid_a );
+                    sceneEl.appendChild(asteroid_b);
+                    
+                    e.parentNode.removeChild(e);
+                  } else if (level > 2)
                     e.parentNode.removeChild(e);
                 }
             })
