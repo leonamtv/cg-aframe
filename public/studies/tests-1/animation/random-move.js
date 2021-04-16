@@ -65,14 +65,9 @@ function testColisionWithAircraft(asteroidEl, aircraftEl) {
     return;
   }
 
-  let audio = new Audio('../../../assets/impact.mp3');
-  audio.volume = 0.8
-  audio.play( ) 
-
   if (currentTime < lastColisionTime + intervalBetweenColisions) {
     return;
   }
-
 
   lastColisionTime = new Date().getTime();
 
@@ -100,6 +95,9 @@ function setCollisionDamage(aircraftEl) {
   const lifes = decreaseAndGetLifesCount();
 
   if (lifes > 0) {
+    let audio = new Audio("../../../assets/impact.mp3");
+    audio.volume = 0.8;
+    audio.play();
     return;
   }
 
@@ -125,7 +123,7 @@ function setGameOver() {
   const camRotationY = cameraEl.getAttribute("rotation").y;
   const camRotationYRad = degToRad(camRotationY);
 
-  const textRadius = 40;
+  const textRadius = 60;
 
   const xOffset = -Math.cos(-camRotationYRad) * 27;
   const zOffset = -Math.sin(-camRotationYRad) * 27;
@@ -155,8 +153,68 @@ function setGameOver() {
   const sceneEl = document.querySelector("a-scene");
   sceneEl.appendChild(textEl);
   gameOver = true;
+  showGameOverEffect();
 
   setTimeout(() => {
     location.reload();
-  }, 1000);
+  }, 3000);
+}
+
+function showGameOverEffect() {
+  let audio = new Audio("../../../assets/explosion2.mp3");
+  audio.volume = 1;
+  audio.play();
+
+  const aircraftEl = document.querySelector("#aircraft");
+
+  aircraftEl.setAttribute("destroyed", "true");
+  setAircraftColorAnimation(aircraftEl);
+
+  setAircraftHeight(aircraftEl, 5, "easeInCubic", 300);
+  setTimeout(() => {
+    setAircraftHeight(aircraftEl, 0.5, "easeOutCubic", 900);
+  }, 400);
+}
+
+function setAircraftColorAnimation(aircraftEl) {
+  aircraftEl.setAttribute(
+    "material",
+    ` color: #c38f0e;
+      opacity: 0.95;
+      transparent: true;
+      shader: flat;
+    `
+  );
+  aircraftEl.setAttribute(
+    "animation__color",
+    ` property: material.color;
+      to: #ca5321;
+      easing: easeInOutQuad;
+      dir: alternate;
+      dur: 250;
+      loop: true  
+    `
+  );
+}
+
+function setAircraftHeight(aircraftEl, height, easing, duration) {
+  const radius = height * 1.25;
+
+  aircraftEl.setAttribute(
+    "animation__height",
+    ` property: height;
+      to: ${height};
+      easinsg: ${easing};
+      dur: ${duration};
+    `
+  );
+
+  aircraftEl.setAttribute(
+    "animation__radius",
+    ` property: radius;
+      to: ${radius};
+      easinsg: ${easing};
+      dur: ${duration};
+    `
+  );
 }
