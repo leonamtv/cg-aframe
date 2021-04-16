@@ -41,11 +41,15 @@
       document.removeEventListener("keyup", interationHandle);
       document.removeEventListener("touchstart", interationHandle);
 
-      let audio = new Audio("../../../assets/trilha.m4a");
-      audio.loop = true;
-      audio.volume = 0.3;
-      audio.play();
+      setTimeout(playBackgroundMusic, 300);
     }
+  }
+
+  function playBackgroundMusic() {
+    let audio = new Audio("../../../assets/trilha.m4a");
+    audio.loop = true;
+    audio.volume = 0.3;
+    audio.play();
   }
 
   function showInstructionsButton() {
