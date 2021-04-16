@@ -16,6 +16,7 @@
 
         waitUserInteraction();
         createMovimentedSpheres();
+        showInstructionsButton();
       },
     });
   }
@@ -35,6 +36,34 @@
       audio.volume = 0.3;
       audio.play();
     }
+  }
+
+  function showInstructionsButton() {
+    setTimeout(() => {
+      const instructionsEl = document.querySelector(".instructions");
+      instructionsEl.style.opacity = 1;
+      document.querySelector(".info-block p").style.opacity = 0;
+
+      instructionsEl.onclick = showInstructions;
+    }, 2000);
+  }
+
+  function showInstructions() {
+    alert(`
+Instruções:
+
+Teclado e mouse:
+- Teclas A/D/W/S: Movimentar a nave
+- Espaço: Atirar
+- Movimento do mouse na horizontal: Girar a câmera
+
+Touch Screen:
+- Toques ao longo da vertical:
+  - Toque no início da tela: Andar para frente
+  - Toque no fim da tela: Andar para trás 
+  - Toque no meio da tela: Atirar
+- Deslizar na tela ao longo da horizontal: Girar a câmera
+`);
   }
 
   function registerBulletEvents() {
