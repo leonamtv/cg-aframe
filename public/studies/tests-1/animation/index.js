@@ -11,15 +11,30 @@
   function registerInitializeComponent() {
     AFRAME.registerComponent("initialize", {
       init: function () {
-        let audio = new Audio('../../../assets/trilha.m4a');
-        audio.loop = true
-        audio.volume = 0.3
-        audio.play( )
         cameraEl = document.querySelector("a-camera");
         aircraftEl = document.querySelector("#aircraft");
+
+        waitUserInteraction();
         createMovimentedSpheres();
       },
     });
+  }
+
+  function waitUserInteraction() {
+    document.addEventListener("mousemove", interationHandle);
+    document.addEventListener("keyup", interationHandle);
+    document.addEventListener("touchstart", interationHandle);
+
+    function interationHandle() {
+      document.removeEventListener("mousemove", interationHandle);
+      document.removeEventListener("keyup", interationHandle);
+      document.removeEventListener("touchstart", interationHandle);
+
+      let audio = new Audio("../../../assets/trilha.m4a");
+      audio.loop = true;
+      audio.volume = 0.3;
+      audio.play();
+    }
   }
 
   function registerBulletEvents() {
