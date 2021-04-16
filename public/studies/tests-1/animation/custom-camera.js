@@ -27,7 +27,7 @@ const keyActions = {
 const maxRotationRangeX = 360 * 2;
 const maxRotationRangeY = 360;
 
-const velocityFactor = 1;
+let velocityFactor = 1;
 
 let cameraEl;
 let aircraftEl;
@@ -64,6 +64,29 @@ function registerEvents() {
   document.onmousemove = handleMouseMove;
   document.onkeydown = handleKeyDown;
   document.onkeyup = handleKeyUp;
+
+  let lastKeyEmulated;
+
+  document.ontouchstart = (e) => {
+    velocityFactor = 10;
+
+    const touch = e.touches[0];
+    const divisorY = window.innerHeight / 3;
+
+    if (touch.pageY <= divisorY) {
+      lastKeyEmulated = 87;
+    }
+
+    if (touch.pageY > divisorY * 2) {
+      lastKeyEmulated = 83;
+    }
+
+    teclasPressionadas[lastKeyEmulated] = true;
+  };
+
+  document.ontouchend = () => {
+    teclasPressionadas[lastKeyEmulated] = false;
+  };
 }
 
 function tickKeyboardMovement() {
