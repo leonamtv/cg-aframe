@@ -75,10 +75,13 @@ function registerBulletMoveComponent() {
                     const sceneEl = document.querySelector("a-scene");
                     sceneEl.appendChild(asteroid_a );
                     sceneEl.appendChild(asteroid_b);
-                    
-                    e.parentNode.removeChild(e);
-                  } else if (level > 2)
-                    e.parentNode.removeChild(e);
+                    if (e.parentNode)
+                      e.parentNode.removeChild(e);
+                  } else if (level > 2) {
+                    if (e.parentNode)
+                      e.parentNode.removeChild(e);
+                  }
+
                 }
             })
 
