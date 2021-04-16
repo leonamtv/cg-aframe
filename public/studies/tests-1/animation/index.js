@@ -68,8 +68,10 @@ Instruções:
 
 Teclado e mouse:
 - Teclas A/D/W/S: Movimentar a nave
-- Espaço: Atirar
+- Tecla espaço: Atirar
 - Movimento do mouse na horizontal: Girar a câmera
+- Tecla F: Entrar em tela cheia
+- Tecla Esc: Sair do modo tela cheia
 
 Touch Screen:
 - Toques ao longo da vertical:
