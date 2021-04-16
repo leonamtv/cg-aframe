@@ -60,32 +60,37 @@ function registerCustomCameraComponent() {
 }
 
 function registerEvents() {
-  document.ontouchstart = handleTouchStart;
   document.onmousemove = handleMouseMove;
   document.onkeydown = handleKeyDown;
   document.onkeyup = handleKeyUp;
 
-  let lastKeyEmulated;
+  let keyEmulated;
 
   document.ontouchstart = (e) => {
     velocityFactor = 10;
 
-    const touch = e.touches[0];
-    const divisorY = window.innerHeight / 3;
+    const { innerWidth, innerHeight } = window;
 
+    const touch = e.touches[0];
+    const divisorX = innerWidth / 2;
+    const divisorY = innerHeight / 3;
+
+    console.log(divisorX, touch.pageX);
     if (touch.pageY <= divisorY) {
-      lastKeyEmulated = 87;
+      keyEmulated = 87;
     }
 
     if (touch.pageY > divisorY * 2) {
-      lastKeyEmulated = 83;
+      keyEmulated = 83;
     }
 
-    teclasPressionadas[lastKeyEmulated] = true;
+    defineCamRotation(touch.pageX, innerWidth);
+
+    teclasPressionadas[keyEmulated] = true;
   };
 
   document.ontouchend = () => {
-    teclasPressionadas[lastKeyEmulated] = false;
+    teclasPressionadas[keyEmulated] = false;
   };
 }
 
@@ -98,19 +103,13 @@ function tickKeyboardMovement() {
     }
   });
 
-  if (enableMouseCameraControl) {
-    moveCamera();
-  }
+  moveCamera();
 
   moveAircraft();
 }
 
 function getCamControlValues() {
   return { camX, camY, camZ, camRotationX, camRotationY, camRotationZ };
-}
-
-function handleTouchStart() {
-  enableMouseCameraControl = false;
 }
 
 function handleMouseMove(event) {
