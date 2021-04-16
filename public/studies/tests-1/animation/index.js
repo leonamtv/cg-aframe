@@ -8,6 +8,16 @@
   let cameraEl;
   let aircraftEl;
 
+  const initialIntervalToCreateAsteroids = 5000;
+  const minIntervalToCreateAsteroids = 500;
+
+  /**
+   * For each 10 points, decrease 100ms in interval
+   * to create a new asteroid
+   */
+  const difficultyIncreaseFactor = 100 / 10;
+  let intervalToCreateAsteroids = initialIntervalToCreateAsteroids;
+
   function registerInitializeComponent() {
     AFRAME.registerComponent("initialize", {
       init: function () {
@@ -90,7 +100,7 @@ Touch Screen:
   }
 
   function createMovimentedSpheres() {
-    setInterval(() => createSphere(), 2000);
+    setTimeout(createSphere, intervalToCreateAsteroids);
   }
 
   function createBullet() {
@@ -155,6 +165,25 @@ Touch Screen:
       { velocityX, velocityY, velocityZ },
       sphereRadius
     );
+
+    increaseDifficultyLevel();
+
+    console.log("timeout", intervalToCreateAsteroids);
+    setTimeout(createSphere, intervalToCreateAsteroids);
+  }
+
+  function increaseDifficultyLevel() {
+    const pontosEl = document.getElementById("pontos");
+    const pontos = parseInt(pontosEl.innerText);
+
+    newIntervalValue =
+      initialIntervalToCreateAsteroids - pontos * difficultyIncreaseFactor;
+
+    intervalToCreateAsteroids = Math.max(
+      minIntervalToCreateAsteroids,
+      newIntervalValue
+    );
+    console.log(pontos, newIntervalValue);
   }
 
   /// 0: center of creation. Replace by aircraft position

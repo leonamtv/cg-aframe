@@ -107,7 +107,7 @@ function setCollisionDamage(aircraftEl) {
 function decreaseAndGetLifesCount() {
   let el = document.getElementById("vida");
   const lifesText = el.innerText;
-  const lifes = lifesText.match("([0-9]?).*")[1];
+  const lifes = lifesText.match("([0-9]*).*")[1];
 
   const newCount = parseInt(lifes) - 1;
   el.innerHTML = newCount.toString() + " de vida";
