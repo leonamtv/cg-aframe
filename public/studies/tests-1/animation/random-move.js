@@ -65,9 +65,14 @@ function testColisionWithAircraft(asteroidEl, aircraftEl) {
     return;
   }
 
+  let audio = new Audio('../../../assets/impact.mp3');
+  audio.volume = 0.8
+  audio.play( ) 
+
   if (currentTime < lastColisionTime + intervalBetweenColisions) {
     return;
   }
+
 
   lastColisionTime = new Date().getTime();
 
