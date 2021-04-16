@@ -168,7 +168,6 @@ Touch Screen:
 
     increaseDifficultyLevel();
 
-    console.log("timeout", intervalToCreateAsteroids);
     setTimeout(createSphere, intervalToCreateAsteroids);
   }
 
@@ -183,7 +182,6 @@ Touch Screen:
       minIntervalToCreateAsteroids,
       newIntervalValue
     );
-    console.log(pontos, newIntervalValue);
   }
 
   /// 0: center of creation. Replace by aircraft position
